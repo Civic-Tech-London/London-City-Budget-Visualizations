@@ -1,0 +1,111 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Highcharts with Node.js</title>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+    </head>
+    <body>
+      <div id="container"></div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          fetch('/data')
+            .then(response => response.json())
+            .then(data => {
+                var ftearray = data;
+                var count = 0;
+                var chartdata = { "type":"line", "categories": ["2024", "2025", "2026", "2027"], "series": []}
+  
+
+                for (const key in ftearray) {
+                    if (ftearray.hasOwnProperty(key)) {
+                        console.log(`Key: ${key}`);
+                        const innerObject = data[key][0][2];
+                        for (const innerKey in innerObject) {
+                            if (innerObject.hasOwnProperty(innerKey)) {
+
+                                var indivObject = {"name": `${key}`, "data": [`${innerObject["2024"]}`, `${innerObject["2025"]}`,`${innerObject["2026"]}`, `${innerObject["2027"]}`]};
+                            
+                            }
+                        }
+                    }
+                    indivObject.data = indivObject.data.map(value => {
+                        if (value === "N/A") return null;
+                        if (typeof value === "string") {
+                            value = value.replace(/[\$,]/g, ""); // Remove dollar sign and commas
+                            value = value.replace(/\s/g, ""); // Remove spaces
+                            return parseFloat(value);
+                        }
+                        return value;
+                    });
+
+                    indivObject.dataLabels = {
+                        enabled: true,
+                        align: 'left',
+                        verticalAlign: 'middle',
+                        formatter: function() {
+                            if (this.point.index === this.series.data.length - 1) {
+                            return this.series.name;
+                            }
+                            return null;
+                        },
+                        crop: false,
+                        overflow: 'none',
+                        x: 10, // Adjust position
+                        y: 0 // Adjust position
+                    };
+            
+                    chartdata["series"].push(indivObject);
+                    
+                    var count = count +1;
+                }          
+                
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'line',
+                        height: '100%',
+                        zoomType: 'y'
+                    },
+                    title: {
+                        text: 'Other Revenues'
+                    },
+                    xAxis: {
+                        categories: chartdata.categories
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Values'
+                        },
+                        min: null,
+                        allowDecimals: false, // Ensure only integers are displayed
+                         tickInterval: 1 // Set the interval between ticks to 1
+                    },
+                    legend: {
+                        enabled: false // Hide the legend
+                    },
+                 
+                    series: chartdata.series
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        });
+      </script>
+
+      <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow:scroll; /* Ensure no overflow issues */
+    }
+    #container {
+      width: 90%;
+     /* Full height of the viewport */
+      box-sizing: border-box; /* Include padding and border in height */
+      margin:5% auto;
+      
+    }
+      </style>
+    </body>
+    </html>
