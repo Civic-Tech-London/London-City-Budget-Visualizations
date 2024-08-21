@@ -1,65 +1,66 @@
 {
-    "Housing Stability Services": 
-        { 
-            "category":"housing-social-health",
+    "category":"housing social health",
+    "services":[
+        {
+            "service":"Housing Stability Services",
             "cost-per-day": 0.18,
             "net-prop-supported-budget-percentage":1.67,
             "budget":[
-            
-            {
-                "Budget Summary": null,
-                "2024": null,
-                "2025": null,
-                "2026": null,
-                "2027": null,
-                "": null,
-                "2024 to 2027": "TOTAL"
-            },
-            {
-                "Budget Summary": "Gross Operating Expenditures",
-                "2024": "$37,026",
-                "2025": "$37,632",
-                "2026": "$38,845",
-                "2027": "$39,973",
-                "": null,
-                "2024 to 2027": null
-            },
-            {
-                "Budget Summary": "Other Revenues",
-                "2024": "-$23,935",
-                "2025": "-$23,026",
-                "2026": "-$23,026",
-                "2027": "-$23,026",
-                "": null,
-                "2024 to 2027": null
-            },
-            {
-                "Budget Summary": "Net Tax Levy Supported Operating Budget",
-                "2024": "$13,091",
-                "2025": "$14,606",
-                "2026": "$15,819",
-                "2027": "$16,947",
-                "": null,
-                "2024 to 2027": null
-            },
-            {
-                "Budget Summary": "Total Capital Expenditures",
-                "2024": "$0",
-                "2025": "$0",
-                "2026": "$0",
-                "2027": "$0",
-                "": null,
-                "2024 to 2027": null
-            },
-            {
-                "Budget Summary": "Full-Time Equivalents",
-                "2024": "46.83",
-                "2025": "42.83",
-                "2026": "42.83",
-                "2027": "42.83",
-                "": null,
-                "2024 to 2027": null
-            }
-        ]
-    }
+                {
+                    "Budget Summary": null,
+                    "2024": null,
+                    "2025": null,
+                    "2026": null,
+                    "2027": null,
+                    "": null,
+                    "2024 to 2027": "TOTAL"
+                },
+                {
+                    "Budget Summary": "Gross Operating Expenditures",
+                    "2024": "$37,026",
+                    "2025": "$37,632",
+                    "2026": "$38,845",
+                    "2027": "$39,973",
+                    "": null,
+                    "2024 to 2027": null
+                },
+                {
+                    "Budget Summary": "Other Revenues",
+                    "2024": "-$23,935",
+                    "2025": "-$23,026",
+                    "2026": "-$23,026",
+                    "2027": "-$23,026",
+                    "": null,
+                    "2024 to 2027": null
+                },
+                {
+                    "Budget Summary": "Net Tax Levy Supported Operating Budget",
+                    "2024": "$13,091",
+                    "2025": "$14,606",
+                    "2026": "$15,819",
+                    "2027": "$16,947",
+                    "": null,
+                    "2024 to 2027": null
+                },
+                {
+                    "Budget Summary": "Total Capital Expenditures",
+                    "2024": "$0",
+                    "2025": "$0",
+                    "2026": "$0",
+                    "2027": "$0",
+                    "": null,
+                    "2024 to 2027": null
+                },
+                {
+                    "Budget Summary": "Full-Time Equivalents",
+                    "2024": "46.83",
+                    "2025": "42.83",
+                    "2026": "42.83",
+                    "2027": "42.83",
+                    "": null,
+                    "2024 to 2027": null
+                }
+            ]
+        }
+    ]
 }
