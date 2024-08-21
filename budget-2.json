@@ -2,7 +2,7 @@
     "category":"housing social health",
     "services":[
         {
-            "service":"Housing Stability Services",
+            "service-name":"Housing Stability Services",
             "cost-per-day": 0.18,
             "net-prop-supported-budget-percentage":1.67,
             "budget":[
