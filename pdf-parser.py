@@ -2,7 +2,6 @@ import os
 import json
 import pdfplumber
 import pandas as pd
-import PyPDF2
 
 def extract_tables_from_pdf(pdf_path):
     tables = []
@@ -14,13 +13,29 @@ def extract_tables_from_pdf(pdf_path):
                 tables.append(df.to_dict(orient='records'))
     return tables
 
+def extract_data(keyphrase):
+
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            text = page.extract_text()
+            if keyphrase in text:
+                keyphrase_pos = text.find(keyphrase)
+                if keyphrase_pos != -1:
+                    extracted_text = text[:keyphrase_pos]
+        
+        return extracted_text
+
 def process_pdfs_in_folder(folder_path):
-    all_tables = {}
+    all_tables = []
     for filename in os.listdir(folder_path):
         if filename.endswith('.pdf'):
             pdf_path = os.path.join(folder_path, filename)
             tables = extract_tables_from_pdf(pdf_path)
-            all_tables[filename] = tables
+            costPerDay = extract_cost_per_day()
+            all_tables.append({"service":filename,
+            "cost-per-day": extract_data( "Cost per day for the average rate payer"),
+            "net-prop-supported-budget-percentage": extract_data( "Cost per day for the average rate payer"),
+            "budget": tables})
     return all_tables
 
 def save_to_json(data, output_file):
