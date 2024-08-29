@@ -13,7 +13,7 @@ def extract_tables_from_pdf(pdf_path):
                 tables.append(df.to_dict(orient='records'))
     return tables
 
-def extract_data(keyphrase):
+def extract_data(keyphrase,pdf_path):
 
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
@@ -22,8 +22,9 @@ def extract_data(keyphrase):
                 keyphrase_pos = text.find(keyphrase)
                 if keyphrase_pos != -1:
                     extracted_text = text[:keyphrase_pos]
+                    return extracted_text
         
-        return extracted_text
+        return "not_found"
 
 def process_pdfs_in_folder(folder_path):
     all_tables = []
@@ -31,10 +32,10 @@ def process_pdfs_in_folder(folder_path):
         if filename.endswith('.pdf'):
             pdf_path = os.path.join(folder_path, filename)
             tables = extract_tables_from_pdf(pdf_path)
-            costPerDay = extract_cost_per_day()
+            # costPerDay = extract_cost_per_day()
             all_tables.append({"service":filename,
-            "cost-per-day": extract_data( "Cost per day for the average rate payer"),
-            "net-prop-supported-budget-percentage": extract_data( "Cost per day for the average rate payer"),
+            "cost-per-day": extract_data( "Cost per day for the average rate payer",pdf_path),
+            "net-prop-supported-budget-percentage": extract_data( "Cost per day for the average rate payer",pdf_path),
             "budget": tables})
     return all_tables
 
@@ -43,8 +44,10 @@ def save_to_json(data, output_file):
         json.dump(data, f, indent=4)
 
 if __name__ == "__main__":
-    folder_path = 'pdfs'
-    output_file = 'output.json'
+    folder_path = '../../../pdfs/' #update to match your path
+    output_file = '../../../pdfs/parsed_output/output.json' #update to match your path
+
+    print(f"running process_pdfs_in_folder() function")
     
     all_tables = process_pdfs_in_folder(folder_path)
     save_to_json(all_tables, output_file)
