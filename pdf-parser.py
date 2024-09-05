@@ -22,6 +22,12 @@ def extract_data(keyphrase,pdf_path):
                 keyphrase_pos = text.find(keyphrase)
                 if keyphrase_pos != -1:
                     extracted_text = text[:keyphrase_pos]
+                    # extracted_text[extracted_text.find("$"),extracted_text.find("%")]
+                    startpos = extracted_text.find("$")
+                    endpos = (extracted_text.find("%")+1)
+                    extracted_text = extracted_text[startpos:endpos]
+                    extracted_text = extracted_text.split()
+                    print(extracted_text)
                     return extracted_text
         
         return "not_found"
@@ -33,9 +39,10 @@ def process_pdfs_in_folder(folder_path):
             pdf_path = os.path.join(folder_path, filename)
             tables = extract_tables_from_pdf(pdf_path)
             # costPerDay = extract_cost_per_day()
+            overview = extract_data( "Cost per day for the",pdf_path)
             all_tables.append({"service":filename,
-            "cost-per-day": extract_data( "Cost per day for the average rate payer",pdf_path),
-            "net-prop-supported-budget-percentage": extract_data( "Cost per day for the average rate payer",pdf_path),
+            "cost-per-day": overview[0], #extract_data( "Cost per day for the",pdf_path),
+            "net-prop-supported-budget-percentage": overview[1], #extract_data( "Cost per day for the average rate payer",pdf_path),
             "budget": tables})
     return all_tables
 
