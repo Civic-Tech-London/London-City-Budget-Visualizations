@@ -9,7 +9,7 @@ def extract_tables_from_pdf(pdf_path):
         for page in pdf.pages:
             extracted_tables = page.extract_tables()
             for table in extracted_tables:
-                df = pd.DataFrame(table[1:], columns=table[0])
+                df = pd.DataFrame(table[2:], columns=table[0])
                 tables.append(df.to_dict(orient='records'))
     return tables
 
