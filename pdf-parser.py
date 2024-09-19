@@ -40,10 +40,18 @@ def process_pdfs_in_folder(folder_path):
             tables = extract_tables_from_pdf(pdf_path)
             # costPerDay = extract_cost_per_day()
             overview = extract_data( "Cost per day for the",pdf_path)
-            all_tables.append({"service":filename,
-            "cost-per-day": overview[0], #extract_data( "Cost per day for the",pdf_path),
-            "net-prop-supported-budget-percentage": overview[1], #extract_data( "Cost per day for the average rate payer",pdf_path),
-            "budget": tables})
+            if(len(overview) == 2):
+                all_tables.append({"service":filename,
+                "cost-per-day": overview[0], #extract_data( "Cost per day for the",pdf_path),
+                "net-prop-supported-budget-percentage": overview[1], #extract_data( "Cost per day for the average rate payer",pdf_path),
+                "budget": tables})
+            
+            else:
+                all_tables.append({"service":filename,
+                "cost-per-day":"unknown", #extract_data( "Cost per day for the",pdf_path),
+                "net-prop-supported-budget-percentage": "unknown", #extract_data( "Cost per day for the average rate payer",pdf_path),
+                "budget": tables})
+
     return all_tables
 
 def save_to_json(data, output_file):
@@ -51,8 +59,8 @@ def save_to_json(data, output_file):
         json.dump(data, f, indent=4)
 
 if __name__ == "__main__":
-    folder_path = '../../../pdfs/' #update to match your path
-    output_file = '../../../pdfs/parsed_output/output.json' #update to match your path
+    folder_path = 'pdfs/' #update to match your path
+    output_file = 'output.json' #update to match your path
 
     print(f"running process_pdfs_in_folder() function")
     
