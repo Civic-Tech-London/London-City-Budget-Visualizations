@@ -7,7 +7,7 @@ const port = 3000;
 app.use(express.static('public'));
 
 app.get('/data', (req, res) => {
-  const jsonFilePath = path.join(__dirname, 'budget-2.json');
+  const jsonFilePath = path.join(__dirname, 'output.json');
   fs.readFile(jsonFilePath, 'utf8', (err, data) => {
     if (err) {
       res.status(500).send('Error reading the JSON file');
