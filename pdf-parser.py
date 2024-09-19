@@ -4,13 +4,13 @@ import pdfplumber
 import pandas as pd
 
 def extract_tables_from_pdf(pdf_path):
-    tables = []
+    tables = "";
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
             extracted_tables = page.extract_tables()
             for table in extracted_tables:
                 df = pd.DataFrame(table[2:], columns=table[0])
-                tables.append(df.to_dict(orient='records'))
+                tables=(df.to_dict(orient='records'))
     return tables
 
 def extract_data(keyphrase,pdf_path):
