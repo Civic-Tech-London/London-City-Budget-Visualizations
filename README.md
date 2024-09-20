@@ -13,3 +13,5 @@ Instructions to [download node](https://nodejs.org/en/download/package-manager).
 Select the *add_version_no* version, then select your OS from the dropdown. Keep the "using" option to fnm (Fast Node Manager)
 
 **NOTE** - If you are using Git Bash on Windows, use the Linux option.
+
+**todo** - instructions to run npm here
