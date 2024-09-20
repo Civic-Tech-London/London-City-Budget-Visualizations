@@ -48,17 +48,13 @@
                 var ftearray = data;
                             
                 var chartdata = { "type":"line", "categories": ["2024", "2025", "2026", "2027"], "series": []}
+                var proceed= false;
+                var budgetObject = "";
 
-
-                for (const key in ftearray) {
-                    if (ftearray.hasOwnProperty(key)) {
-                       
-                        var innerArray = data[key]["budget"];
-                        console.log(innerArray)
-        
-                        var proceed= false;
-                        var budgetObject = "";
-                        innerArray.forEach(element => {
+                ftearray.forEach(function(object){
+                    console.log(object)
+                    
+                    object["budget"].forEach(element => {
                             console.log(element["Budget Summary"]);
                             console.log(budgetIndex);
                             console.log("\n")
@@ -69,13 +65,12 @@
                             }
                            
                         });
-                        if(proceed == true){
-                            console.log("IN PROCEED");
-                          var indivObject = {"name": `${key}`, "data": [`${budgetObject["2024"]}`, `${budgetObject["2025"]}`,`${budgetObject["2026"]}`, `${budgetObject["2027"]}`]};
-                         }
-                           
-                    }
+                
+                   
                     if(proceed == true){
+                        console.log("IN PROCEED");
+                        var indivObject = {"name": object["service"], "data": [`${budgetObject["2024"]}`, `${budgetObject["2025"]}`,`${budgetObject["2026"]}`, `${budgetObject["2027"]}`]};
+                    
                         indivObject.data = indivObject.data.map(value => {
                             
                             if (value === "N/A") return null;
@@ -106,7 +101,7 @@
 
                         chartdata["series"].push(indivObject);
                     }
-                } 
+                }); 
                 return chartdata;     
             }
 
