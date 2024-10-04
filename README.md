@@ -5,6 +5,8 @@ https://drive.google.com/file/d/11mwgkpFSpDYLpQK8p0Oj-qspqgtDOBHc/preview
 ### Python
 * pdfplumber - `pip install pdfplumber`
 * pandas - `pip install pandas`
+* requests - `pip install requests`
+* BeautifulSoup - `pip install beautifulsoup4`
 
 ## Required packages
 ### Node.js and NPM
