@@ -1,0 +1,12 @@
+{
+  "name": "Budget demo dev container",
+  "dockerComposeFile": ["../docker-compose.yml", "docker-compose.devcontainer.yml"],
+  "service": "app",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "ms-python.python"]
+    }
+  },
+  "remoteUser": "node"
+}
