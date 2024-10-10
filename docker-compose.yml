@@ -1,0 +1,16 @@
+services:
+  app:
+    container_name: budget-demo
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+      args:
+        NODE_VERSION: 20
+        PYTHON_VERSION: 3.11
+    volumes:
+      - .:/app
+      - /app/node_modules # Preserves node_modules in container, prevents overwriting from host
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development

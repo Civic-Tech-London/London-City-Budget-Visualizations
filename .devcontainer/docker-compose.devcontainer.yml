@@ -1,0 +1,10 @@
+services:
+  app:
+    user: node
+    volumes:
+      - .:/app:cached
+      - node_modules:/app/node_modules
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+volumes:
+  node_modules:
